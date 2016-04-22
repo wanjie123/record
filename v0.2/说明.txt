@@ -1,0 +1,36 @@
+Config.h Config.cpp为读取配置文件模块
+record.cpp为录制视频模块
+config.txt为配置文件
+
+
+编译：
+g++ record.cpp Config.cpp Config.h -o record-0.2
+
+运行：
+./record-0.2 ./config.txt
+
+
+
+config.txt文件说明：
+camerainfo —— 对应摄像头信息，如：164
+streaminfo —— 对应摄像头发出来的流地址，如：rtsp://admin:extremevision201@192.168.1.165:554/mpe4/ch1/main/av_stream
+applicationpath —— 对应录制文件的存放的顶导路径，如：/mnt
+ffmpegpath —— 对应ffmpeg应用程序所在的完整路径，如：/mnt/ffmpeg/ffmpeg
+bitrate —— 对应录制视频时指定的视频码率，单位为kbps，如：512（允许不设置，此时应删除该配置）
+imageresolution —— 对应录制视频时指定的视频分辨率，如：1280x720（允许不设置，此时应删除该配置）
+framerate —— 对应录制视频时指定的视频帧率，单位为fps，如：5（允许不设置，此时应删除该配置）
+
+注：
+1、须事先安装ffmpeg。也可按照如下方式来简易安装：
+	1）将提供的ffmpeg文件夹放到/mnt下。
+	2）执行chmod +x /mnt/ffmpeg/ffmpeg
+	3）修改/etc/ld.so.conf，在文件的最后一行添加ffmpeg所在路径，即添加/mnt/ffmpeg
+	4）执行ldconfig，使ffmpeg能正常运行
+	此时ffmpeg应用程序所在的完整路径为：/mnt/ffmpeg/ffmpeg
+
+2、当bitrate、imageresolution与imageresolution均不存在时，将按照原始视频的帧率、码率和分辨率来进行录制
+
+
+
+record.sh能正常运行的前提是需要机器上有安装ffmpeg。
+record.sh —— 通过调用record-0.2来，录制指定的视频信息，并保存指定天数的数据（前提是硬盘允许）。也可以修改相应的参数来进行录制、存储（详细可参见操作流程）

@@ -1,0 +1,32 @@
+record.cpp —— 录制指定的视频信息，也可以修改相应的参数来进行录制、存储
+
+编译：
+g++ record.cpp -o record-0.1
+
+
+运行：
+./record-0.1 165 "rtsp://admin:extremevision201@192.168.1.165:554/mpe4/ch1/main/av_stream" /mnt /usr/local/bin/ffmpeg "b=512" "f=5" "s=640x360"
+
+165 —— 对应摄像头信息
+"rtsp://admin:extremevision201@192.168.1.165:554/mpe4/ch1/main/av_stream" —— 对应摄像头发出来的流地址
+/mnt —— 对应录制文件的存放的顶导路径
+/mnt/ffmpeg/ffmpeg —— 对应ffmpeg应用程序所在的完整路径
+"b=512" —— 对应录制视频时指定的视频码率，单位为kbps
+"s=640x360" —— 对应录制视频时指定的视频分辨率
+"f=5" —— 对应录制视频时指定的视频帧率，单位为fps
+
+
+注：
+1、须事先安装ffmpeg。也可按照如下方式来安装：
+	1）将提供的ffmpeg文件夹放到/mnt下。
+	2）执行chmod +x /mnt/ffmpeg/ffmpeg
+	3）修改/etc/ld.so.conf，在文件的最后一行添加ffmpeg所在路径，即添加/mnt/ffmpeg
+	4）执行ldconfig，使ffmpeg能正常运行
+	此时ffmpeg应用程序所在的完整路径为：/mnt/ffmpeg/ffmpeg
+
+2、当bitrate、imageresolution与imageresolution均不存在时，将按照原始视频的帧率、码率和分辨率来进行录制
+
+
+
+record.sh能正常运行的前提是需要机器上有安装ffmpeg。
+record.sh —— 通过调用record-0.1来，录制指定的视频信息，并保存指定天数的数据（前提是硬盘允许）。也可以修改相应的参数来进行录制、存储（详细可参见操作流程）

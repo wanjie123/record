@@ -1,0 +1,7 @@
+camerainfo=164
+streaminfo=rtsp://admin:extremevision201@192.168.1.165:554/mpe4/ch1/main/av_stream
+applicationpath=/mnt
+ffmpegpath=/mnt/ffmpeg/ffmpeg
+bitrate=512
+imageresolution=1280x720
+framerate=5
